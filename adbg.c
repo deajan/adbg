@@ -3,12 +3,17 @@
 // Mix of functions from https://www.apriorit.com/dev-blog/367-anti-reverse-engineering-protection-techniques-to-use-before-releasing-software and https://github.com/cetfor/AntiDBG
 // Ported to mingw by Orsiris de Jong https://github.com/deajan/adbg (for fun only, won't be maintained... Please fork and improve :)
 
-#include <stdio.h>
 #include <windows.h>
 #include <winternl.h>
 #include <stdbool.h>
 
+// Print some shady stuff to stdout if debugger is found and exit ?
+// Comment to keep normal behavior
+#define EXIT_ON_DEBUGGER_FOUND TRUE
 
+#ifdef EXIT_ON_DEBUGGER_FOUND
+#include <stdio.h>
+#endif
 
 WORD GetVersionWord(void)
 {
@@ -266,19 +271,26 @@ void Commodore64(void)
 {
 	// Total nonesone function
 	// Don't worry, nothing bad is done. Just being a nostalgic j***
-
+#ifdef EXIT_ON_DEBUGGER_FOUND
 	printf("  ***** COMMODORE 64 BASIC V2 *****\n\n64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY.\nPOKE 53280,1\nLOAD\"*\",8,1\nREADY.\nRUN\n\n10 PRINT \"SORRY\"\n20 boot linux-v4.1.15-skyn12.T800\nSORRY\nrm -rf /\nrm: cannot remove directory `dev': Device or resource busy");
 
 	// Wait for nothing (...yes I know sleep exists, but making cpu go crazy is more fun)
 	for(int i=0; i<=1000000000; i++);
 
 	exit(4);
+#else
+	;
+#endif
+
 }
 
 
 void TestDebugger(void)
 {
 	BullShitFunction();
+	HideFromDebugger();
+	RemoveHWBreakPoints();
+
 	if (IsDebuggerPresent()) {
 		BullShitFunction();
 		Commodore64();
@@ -299,7 +311,5 @@ void TestDebugger(void)
 		BullShitFunction();
 		Commodore64();
 	}
-	RemoveHWBreakPoints();
-	HideFromDebugger();
 	BullShitFunction();
 }
