@@ -6,6 +6,7 @@
 #include <windows.h>
 #include <winternl.h>
 #include <stdbool.h>
+#include "adbg.h"
 
 // Print some shady stuff to stdout if debugger is found and exit ?
 // Comment to keep normal behavior
@@ -155,37 +156,27 @@ int CheckDebugRegisters(void)
 
 int adbg_CheckWindowName(void)
 {
-	// Hell yes I know this is badly coded
 	BOOL found = FALSE;
 	HANDLE hWindow = NULL;
 	HANDLE hWinDbg = NULL;
 
-	// Check for IDA Pro
-	hWindow = FindWindow(TEXT("Qt5QWindowIcon"), NULL);
-	if (hWindow)
-	{
-		found = TRUE;
-	}
+	int i;
 
-	// Check for OllyDBG
-	hWindow = FindWindow(TEXT("OLLYDBG"), NULL);
-	if (hWindow)
-	{
-		found = TRUE;
-	}
+	char window_names[3][20] = {
+			//"Qt5QWindowIcon", // IDA Pro (disabled since other windows use Qt too)
+			"OLLYDBG",
+			"ID",
+			"Visual",
+			};
 
-	// Check for Immunity
-	hWindow = FindWindow(TEXT("ID"), NULL);
-	if (hWindow)
+	for (i=0;i<sizeof(window_names);i++)
 	{
-		found = TRUE;
-	}
-
-	// Check for Visual studio
-	hWindow = FindWindow(TEXT("Visual"), NULL);
-	if (hWindow)
-	{
-		found = TRUE;
+		hWindow = FindWindow(TEXT(window_names[i]), NULL);
+		if (hWindow)
+		{
+			found = TRUE;
+			printf(window_names[i]);
+		}
 	}
 
 	// Check for WinDbg frame class
@@ -228,6 +219,7 @@ void BullShitFunction(void)
 {
 	// Doing a lot of nonesense copies
 	// Messing with strings
+
 	int i=0;
 	int j=4;
 	float b;
@@ -287,10 +279,20 @@ void Commodore64(void)
 
 void TestDebugger(void)
 {
-	BullShitFunction();
+	// Let's play hide and seek
 	HideFromDebugger();
-	RemoveHWBreakPoints();
+	// Run the useless
+	BullShitFunction();
 
+	if (CheckDebugRegisters()) {
+		BullShitFunction();
+		Commodore64();
+
+	}
+
+	// If debug registers not set, force set them (removes break points)
+	// This obviously need to be run after checking for debug registers
+	RemoveHWBreakPoints();
 	if (IsDebuggerPresent()) {
 		BullShitFunction();
 		Commodore64();
@@ -303,13 +305,12 @@ void TestDebugger(void)
 		BullShitFunction();
 		Commodore64();
 	}
-	if (CheckDebugRegisters()) {
-		BullShitFunction();
-		Commodore64();
-	}
+	/* For whatever unholy reason, this makes my app unstable
 	if (adbg_CheckWindowName()) {
 		BullShitFunction();
 		Commodore64();
 	}
+	*/
+	// Again we are doing useless stuff
 	BullShitFunction();
 }
