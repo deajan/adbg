@@ -280,6 +280,11 @@ void TestDebugger(void) {
     // If debug registers not set, force set them (removes break points)
     // This obviously need to be run after checking for debug registers
     RemoveHWBreakPoints();
+	
+    if (CheckHeap()) {
+        BullShitFunction();
+        Commodore64();
+    }		
     if (IsDebuggerPresent()) {
         BullShitFunction();
         Commodore64();
