@@ -150,7 +150,7 @@ int adbg_CheckWindowName(void) {
 
     int i;
 
-    char window_names[3][20] = {
+    char window_names[][20] = {
             // "Qt5QWindowIcon", // IDA Pro
             // (disabled since other windows use Qt too)
             "OLLYDBG",
@@ -158,7 +158,7 @@ int adbg_CheckWindowName(void) {
             "Visual",
             };
 
-    for (i = 0; i < sizeof(window_names); i++) {
+    for (i = 0; i < sizeof(window_names) / sizeof(window_names[0]); i++) {
         hWindow = FindWindow(TEXT(window_names[i]), NULL);
         if (hWindow) {
             found = TRUE;
