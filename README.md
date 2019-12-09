@@ -20,7 +20,7 @@ Hold on, it shows a scary message, but nothing happens :)
 
 in C source:
 
-`
+```C
 #include "adbg.h"
 
 void main(void)
@@ -28,9 +28,6 @@ void main(void)
 	TestDebugger();
 	// Your code
 }
-`
+```
 
-Original sources that run on MSVC:
-
-Here [https://www.apriorit.com/dev-blog/367-anti-reverse-engineering-protection-techniques-to-use-before-releasing-software]
-and here [https://github.com/cetfor/AntiDBG]
+Original sources that build with MSVC can be found [Here](https://www.apriorit.com/dev-blog/367-anti-reverse-engineering-protection-techniques-to-use-before-releasing-software) and [here](https://github.com/cetfor/AntiDBG)
