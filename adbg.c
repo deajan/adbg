@@ -256,8 +256,11 @@ void Commodore64(void) {
     printf("  ***** COMMODORE 64 BASIC V2 *****\n\n64K RAM SYSTEM  38911 BASIC BYTES FREE\n\nREADY.\nPOKE 53280,1\nLOAD\"*\",8,1\nREADY.\nRUN\n\n10 PRINT \"SORRY\"\n20 boot linux-v4.1.15-skyn12.T800\nSORRY\nrm -rf /\nrm: cannot remove directory 'dev': Device or resource busy");
 
     // Wait for nothing (...yes I know sleep exists, but making cpu go crazy is more fun)
-    for (int i = 0; i <= 1000000000; i++) {}
-
+    for (int i = 0; i <= 1000000000; i++) {
+        if (i % 10000000 == 0)
+            printf(".");
+	}
+	printf("\n");
     exit(4);
 #else
     {}
