@@ -1,4 +1,4 @@
-# adbg
+# adbg [![Codacy Badge](https://api.codacy.com/project/badge/Grade/cd32f95204cc4879bb1b803d0ef49274)](https://www.codacy.com/manual/ozy/adbg?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=deajan/adbg&amp;utm_campaign=Badge_Grade)
  
 A simple use and forget library that implements some basic antidebugging techniques.
 It's based on mostly code found on the below sites which I ported to mingw.
