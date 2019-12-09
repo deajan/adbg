@@ -16,12 +16,10 @@ It simply tests for debugger presence by trying a couple of different techniques
 Once found, it will execute a so called "bullshit function" that just messes around, then exits by showing the mighty commodore 64 basic that loads some linux (?)
 Hold on, it shows a scary message, but nothing happens :)
 
-
 ## Usage
 
 in C source:
 
-`
 #include "adbg.h"
 
 void main(void)
@@ -33,5 +31,5 @@ void main(void)
 
 Original sources that run on MSVC:
 
-https://www.apriorit.com/dev-blog/367-anti-reverse-engineering-protection-techniques-to-use-before-releasing-software
-https://github.com/cetfor/AntiDBG
+Here [https://www.apriorit.com/dev-blog/367-anti-reverse-engineering-protection-techniques-to-use-before-releasing-software]
+and here [https://github.com/cetfor/AntiDBG]
