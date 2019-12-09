@@ -162,7 +162,6 @@ int adbg_CheckWindowName(void) {
         hWindow = FindWindow(TEXT(window_names[i]), NULL);
         if (hWindow) {
             found = TRUE;
-            printf(window_names[i]);
         }
     }
 
