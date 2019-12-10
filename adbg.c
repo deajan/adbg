@@ -299,12 +299,10 @@ void TestDebugger(void) {
         BullShitFunction();
         Commodore64();
     }
-    /* For whatever unholy reason, this makes my app unstable
     if (adbg_CheckWindowName()) {
         BullShitFunction();
         Commodore64();
     }
-    */
     // Again we are doing useless stuff
     BullShitFunction();
 }
