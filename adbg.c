@@ -283,10 +283,12 @@ void TestDebugger(void) {
     // This obviously need to be run after checking for debug registers
     RemoveHWBreakPoints();
 
+    /* Makes busybox unstable
     if (CheckHeap()) {
         BullShitFunction();
         Commodore64();
     }
+    */
     if (IsDebuggerPresent()) {
         BullShitFunction();
         Commodore64();
@@ -295,6 +297,7 @@ void TestDebugger(void) {
         BullShitFunction();
         Commodore64();
     }
+    /* Makes busybox unstable
     if (CheckNtGlobalFlag()) {
         BullShitFunction();
         Commodore64();
@@ -303,6 +306,7 @@ void TestDebugger(void) {
         BullShitFunction();
         Commodore64();
     }
+    */
     // Again we are doing useless stuff
     BullShitFunction();
 }
